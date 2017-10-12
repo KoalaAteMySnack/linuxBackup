@@ -1,0 +1,15 @@
+#to be added to /etc/hosts
+#to be finished later
+
+0.0.0.0		facebook.com
+::0		facebook.com
+0.0.0.0		twitter.com
+::0		twitter.com
+0.0.0.0		myspace.com
+::0		myspace.com
+0.0.0.0		disqus.com
+::0		disqus.com
+0.0.0.0		microsoft.com
+::0		microsoft.com
+0.0.0.0		yahoo.com
+::0		yahoo.com
