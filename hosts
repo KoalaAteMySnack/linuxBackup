@@ -1,7 +1,9 @@
-##build.date:Sun Oct 22 18:14:25 AEDT 2017
+##build.date:Wed Nov 15 15:27:08 AEDT 2017
 ##work in progress
 ##add to /etc/hosts
 ##add to /system/etc/hosts
+127.0.0.1	localhost
+::1	localhost
 0.0.0.0	ad-maven.com
 0.0.0.0	www.ad-maven.com
 0.0.0.0	m.ad-maven.com
@@ -326,6 +328,12 @@
 ::0	linkedin.com
 ::0	www.linkedin.com
 ::0	m.linkedin.com
+0.0.0.0	messenger.com
+0.0.0.0	www.messenger.com
+0.0.0.0	m.messenger.com
+::0	messenger.com
+::0	www.messenger.com
+::0	m.messenger.com
 0.0.0.0	myspace.com
 0.0.0.0	www.myspace.com
 0.0.0.0	m.myspace.com
@@ -462,6 +470,8 @@
 ::0	login.facebook.com
 0.0.0.0	pbs.twimg.com
 ::0	pbs.twimg.com
+0.0.0.0	plus.google.com
+::0	plus.google.com
 0.0.0.0	scan.snapchat.com
 ::0	scan.snapchat.com
 0.0.0.0	static.ak.fbcdn.net
