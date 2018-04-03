@@ -1,0 +1,9 @@
+#!/bin/bash
+
+##
+## Name: makeUniDirectories
+## Description: Makes a predefined set of directories for university classes
+## Author: KoalaAteMySnack@github.com
+## Version: 0.01
+## Last updated: Wed Apr 4, 2018 8:41am
+##

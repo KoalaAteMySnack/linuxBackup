@@ -1,0 +1,9 @@
+#!/bin/bash
+
+##
+## Name: mirrorListGrab
+## Description: Creates a new pacman mirrorlist and creates a backup of the old
+## Author: KoalaAteMySnack@github.com
+## Version: 0.01
+## Last updated: Wed Apr 4, 2018 8:43am
+##

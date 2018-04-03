@@ -1,0 +1,6 @@
+#!/bin/bash
+
+for file in bin/*
+do
+	echo "ls -s $file $HOME/$file"
+done
