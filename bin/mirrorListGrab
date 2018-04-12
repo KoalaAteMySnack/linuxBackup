@@ -1,9 +1,50 @@
-#!/bin/bash
+#!/bin/sh
 
 ##
 ## Name: mirrorListGrab
-## Description: Creates a new pacman mirrorlist and creates a backup of the old
+## Description: Grabs a new pacman mirrorlist and creates a backup of the old
 ## Author: KoalaAteMySnack@github.com
 ## Version: 0.01
-## Last updated: Wed Apr 4, 2018 8:43am
+## Last updated: Thu Apr 12, 2018 18:58
 ##
+
+DATE=$(date +"%Y%m%d")
+PACFILE=/etc/pacman.d/mirrorlist
+HOMEFILE=$HOME/tmp/mlist
+
+## check if original mirrorlist exists
+if [ ! -f $PACFILE ]
+then
+	echo "[ FAILED ] Mirrorlist is missing"
+	exit
+fi
+
+## create a backup of the original mirrorlist
+sudo cp $PACFILE $PACFILE.bk.$DATE
+
+## validate the backup was a success
+if [ ! -f $PACFILE.bk.$DATE ]
+then
+	echo "[ FAILED ] Mirrolist backup failed"
+	exit
+fi
+
+## bring down the new list
+wget --server-response -o $HOME/tmp/tmpresp -q "https://www.archlinux.org/mirrorlist/?country=AU&country=US&protocol=http&protocol=https&ip_version=4&ip_version=6" -O $HOMEFILE
+
+## store the response number in a temp variable
+RESP=$(cat $HOME/tmp/tmpresp | awk '/HTTP/ {print $2}')
+
+## remove the hashes, move the new mirrorlist across and cleanup
+## only if response was welcoming
+if [ $RESP -eq 200 ]
+then
+	sed -i 's/#//' $HOMEFILE
+	sudo mv $HOMEFILE $PACFILE
+	rm $HOME/tmp/tmpresp
+	echo "[ ALL DONE ] Finished"	
+else
+	echo "[ FAILED ] Something went bonkers ... Check the stuff"
+	rm $HOME/tmp/tmpresp
+	exit
+fi
