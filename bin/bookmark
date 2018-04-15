@@ -1,0 +1,45 @@
+#!/bin/sh
+
+##
+## Name: bookmark 
+## Description: handle bookmarks in plain text file
+## Author: KoalaAteMySnack@github.com
+## Version: 0.01
+## Last updated: Sun Apr 15, 2018 16:38
+##
+
+## count lines in bookmarks and increment by 1
+C=$(wc -l $HOME/bookmarks | awk '/ / {print $1}')
+let C=++C
+
+## zero options
+url_=0
+desc_=0
+find_=0
+
+## while loop with case
+while getopts :u:d:f: opt
+do
+	case $opt in
+		u) url_=1
+			url_val=${OPTARG} ;;
+		d) desc_=1
+			desc_val=${OPTARG} ;;
+		f)find_=1
+			find_val=${OPTARG} ;;
+		?) echo "[X] invalid selection"
+			exit ;;
+	esac
+done
+
+## go through the options
+if [ $find_ -eq 1 ]
+then
+	cat $HOME/bookmarks | grep $find_val | awk -F "::" '{printf "%s\n\t=>%s\n", $2, $3}'
+elif [[ $url_ -eq 1 && $desc_ -eq 1 && -z "$5" ]]
+then
+	echo "$C :: $url_val :: $desc_val" >> $HOME/bookmarks
+	echo "entered successfully on line $C"
+else
+	echo "usage: bookmark [-f pattern-to-find] || [-u url] [-d description]"
+fi
