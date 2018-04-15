@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 ##
 ## Name: watchTex
@@ -10,22 +10,22 @@
 
 
 ## test if parameter 1 is null
-if [[ -z $1 ]]
+if [ -z $1 ]
 then
 	echo "No parameter given"
 	exit
 ## test if parameter is not a file
-elif [[ ! -f $1 ]]
+elif [ ! -f $1 ]
 then
 	echo "Not a valid file ... might be a directory"
 	exit
 ## test if parameter does not have valid .tex extension
-elif [[ ${1: -4} != .tex ]]
+elif [ ${1: -4} != .tex ]
 then
 	echo "Not a valid tex file"
 	exit
 ## test if parameter has valid .tex extension
-elif [[ ${1: -4} == .tex ]]
+elif [ ${1: -4} == .tex ]
 then
 ## open termite with vim and the paramter
 ## use latexmk to output to pdf and live preview

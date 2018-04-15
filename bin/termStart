@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 ##
 ## Name: termStart
@@ -7,3 +7,4 @@
 ## Version: 0.01
 ## Last updated: Wed Apr 4, 2018 8:46am
 ##
+
