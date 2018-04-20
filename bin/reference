@@ -1,0 +1,12 @@
+#!/bin/sh
+
+C=$(wc -l $HOME/references | awk '/ / {print $1}')
+let C=++C
+
+if [[ -z $1 ]]
+then
+	echo "usage: reference [author] [publisher] [title] [quote] [retrieved-from] [year-published] [type]"
+else
+	echo "$1 :: $2 :: $3 :: $4 :: $5 :: $6 :: $7" >> $HOME/references
+	echo "entered successfully on line $C"
+fi
