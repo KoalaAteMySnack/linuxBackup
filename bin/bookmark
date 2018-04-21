@@ -5,12 +5,12 @@
 ## Description: handle bookmarks in plain text file
 ## Author: KoalaAteMySnack@github.com
 ## Version: 0.01
-## Last updated: Sun Apr 15, 2018 16:38
+## Last updated: Sat Apr 21, 2018 19:54
 ##
 
 ## count lines in bookmarks and increment by 1
-C=$(wc -l $HOME/bookmarks | awk '/ / {print $1}')
-let C=++C
+c=$(wc -l $HOME/bookmarks | awk '/ / {print $1}')
+let c=++c
 
 ## zero options
 url_=0
@@ -38,8 +38,8 @@ then
 	cat $HOME/bookmarks | grep $find_val | awk -F "::" '{printf "%s\n\t=>%s\n", $2, $3}'
 elif [[ $url_ -eq 1 && $desc_ -eq 1 && -z "$5" ]]
 then
-	echo "$C :: $url_val :: $desc_val" >> $HOME/bookmarks
-	echo "entered successfully on line $C"
+	echo "$c :: $url_val :: $desc_val" >> $HOME/bookmarks
+	echo "entered successfully on line $c"
 else
 	echo "usage: bookmark [-f pattern-to-find] || [-u url] [-d description]"
 fi

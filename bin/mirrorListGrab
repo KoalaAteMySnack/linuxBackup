@@ -5,32 +5,32 @@
 ## Description: Grabs a new pacman mirrorlist and creates a backup of the old
 ## Author: KoalaAteMySnack@github.com
 ## Version: 0.01
-## Last updated: Thu Apr 12, 2018 18:58
+## Last updated: Sat Apr 21, 2018 20:01
 ##
 
-DATE=$(date +"%Y%m%d")
-PACFILE=/etc/pacman.d/mirrorlist
-HOMEFILE=$HOME/tmp/mlist
+date=$(date +"%Y%m%d")
+pacfile=/etc/pacman.d/mirrorlist
+homefile=$HOME/tmp/mlist
 
 ## check if original mirrorlist exists
-if [ ! -f $PACFILE ]
+if [ ! -f $pacfile ]
 then
 	echo "[ FAILED ] Mirrorlist is missing"
 	exit
 fi
 
 ## create a backup of the original mirrorlist
-sudo cp $PACFILE $PACFILE.bk.$DATE
+sudo cp $pacfile $pacfile.bk.$date
 
 ## validate the backup was a success
-if [ ! -f $PACFILE.bk.$DATE ]
+if [ ! -f $pacfile.bk.$date ]
 then
 	echo "[ FAILED ] Mirrolist backup failed"
 	exit
 fi
 
 ## bring down the new list
-wget --server-response -o $HOME/tmp/tmpresp -q "https://www.archlinux.org/mirrorlist/?country=AU&country=US&protocol=http&protocol=https&ip_version=4&ip_version=6" -O $HOMEFILE
+wget --server-response -o $HOME/tmp/tmpresp -q "https://www.archlinux.org/mirrorlist/?country=AU&country=US&protocol=http&protocol=https&ip_version=4&ip_version=6" -O $homefile
 
 ## store the response number in a temp variable
 RESP=$(cat $HOME/tmp/tmpresp | awk '/HTTP/ {print $2}')
@@ -39,8 +39,8 @@ RESP=$(cat $HOME/tmp/tmpresp | awk '/HTTP/ {print $2}')
 ## only if response was welcoming
 if [ $RESP -eq 200 ]
 then
-	sed -i 's/#//' $HOMEFILE
-	sudo mv $HOMEFILE $PACFILE
+	sed -i 's/#//' $homefile
+	sudo mv $homefile $pacfile
 	rm $HOME/tmp/tmpresp
 	echo "[ ALL DONE ] Finished"	
 else
